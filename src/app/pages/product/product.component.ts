@@ -16,16 +16,17 @@ export class ProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProducts();
-    this.getProduct();
-    this.updateProduct();
-    this.createProduct();
-    this.deleteProduct();
+   // this.getProduct();
+    //this.updateProduct();
+    //this.createProduct();
+    //this.deleteProduct();
   }
  getProducts(){
    this.productHttpService.getAll().subscribe(
     response=>{
        this.products= response
-      console.log(response)})
+      console.log(response)}
+      )
  }
  getProduct(){
    this.productHttpService.getOne(2).subscribe(
@@ -59,10 +60,10 @@ export class ProductComponent implements OnInit {
     response => {
       console.log(response)})
  }
- deleteProduct(){
-  this.productHttpService.destroy(1).subscribe(
+ deleteProduct(id:ProductModel['id']){
+  this.productHttpService.destroy(id).subscribe(
     response => {
-      //this.products= this.products.filter(product => product.id != id)
+      this.products= this.products.filter(product => product.id != id);
       console.log(response)})
  }
 
